@@ -1,0 +1,26 @@
+kind: Certificate
+apiVersion: cert-manager.io/v1
+metadata:
+  name: gloo-telemetry-gateway
+  namespace: gloo-mesh
+spec:
+  secretName: gloo-telemetry-gateway-tls-secret
+  duration: 8760h # 365 days
+  renewBefore: 360h # 15 days
+  # Issuer for certs
+  issuerRef:
+    group: awspca.cert-manager.io
+    kind: AWSPCAIssuer
+    name: relay-root-ca
+  commonName: gloo-telemetry-gateway
+  dnsNames:
+    # Domain for gateway's DNS entry
+    - gloo-telemetry-gateway.kyle.consultsolo.net
+  usages:
+    - server auth
+    - client auth
+    - digital signature
+    - key encipherment
+  privateKey:
+    algorithm: "RSA"
+    size: 2048

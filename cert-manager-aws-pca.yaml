@@ -1,0 +1,12 @@
+apiVersion: awspca.cert-manager.io/v1beta1
+kind: AWSPCAIssuer
+metadata:
+  name: relay-root-ca
+  namespace: gloo-mesh
+spec:
+  arn: arn:aws:acm-pca:us-east-2:195186213079:certificate-authority/4c77e16a-6455-4d35-abe4-4ce29ce4f181 
+  region: us-east-2 
+  secretRef:
+    namespace: gloo-mesh
+    name: gloo-mesh-acm-credentials
+

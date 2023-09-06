@@ -1,0 +1,25 @@
+kind: Certificate
+apiVersion: cert-manager.io/v1
+metadata:
+  name: gloo-mesh-agent-cluster2
+  namespace: gloo-mesh
+spec:
+  commonName: gloo-mesh-agent-cluster2
+  dnsNames:
+    # Must match the cluster name used in the helm chart install
+    - "cluster1"
+  # 1 year life
+  duration: 8760h0m0s
+  issuerRef:
+    group: awspca.cert-manager.io
+    kind: AWSPCAIssuer
+    name: relay-root-ca
+  renewBefore: 8736h0m0s
+  secretName: gloo-mesh-agent-cluster1-tls-cert
+  usages:
+    - server auth
+    - client auth
+  privateKey:
+    algorithm: "RSA"
+    size: 4096
+
